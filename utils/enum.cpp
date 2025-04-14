@@ -1,4 +1,5 @@
 #include "enum.h"
+#include "../implementations/activation.cpp"
 
 std::string layerEnumToString(LayerTypeEnum type){
     switch(type){
@@ -14,5 +15,14 @@ std::string activationEnumToString(ActivationTypeEnum type){
             return "ReLU";
         default:
             return "Other";
+    };
+}
+
+ActivationFunction activationEnumToActivate(ActivationTypeEnum type){
+    switch(type){
+        case ActivationTypeEnum::ReLU:
+            return ReLU::activate;
+        default:
+            throw std::bad_typeid();
     };
 }

@@ -3,6 +3,11 @@
 #include <cmath>
 
 
+struct NoneActivation : Activation{
+public:
+    static void activate(Matrix& logits){}
+};
+
 struct ReLU : Activation {
 public:
     static void activate(Matrix& logits){

@@ -12,19 +12,16 @@
 
 class Layer{
 public:
-    using ActivationFunction = void (*)(Matrix&);
-
     Matrix weight;
     Matrix bias;
-    enum LayerTypeEnum type;
-    ActivationFunction activate;
+    LayerTypeEnum type;
+    ActivationTypeEnum activation;
     Layer* next = nullptr;
     Layer* prev = nullptr;
 
     Layer(size_t inputSize, size_t outputSize, LayerTypeEnum type, ActivationTypeEnum activation);
     Layer(size_t inputSize, size_t outputSize);
 
-    void setActivation(ActivationTypeEnum activation);
     size_t getSize();
     void print();
 

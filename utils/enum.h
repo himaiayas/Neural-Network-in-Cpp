@@ -8,7 +8,13 @@ enum ActivationTypeEnum{
     ReLU
 };
 
+
+
 std::string layerEnumToString(LayerTypeEnum type);
 std::string activationEnumToString(ActivationTypeEnum type);
+
+using ActivationFunction = void (*)(Matrix&);
+ActivationFunction activationEnumToActivate(ActivationTypeEnum type);
+
 
 #endif
