@@ -3,7 +3,7 @@
 #include "activation.cpp"
 
 Layer::Layer(size_t inputSize, size_t outputSize, LayerTypeEnum type, ActivationTypeEnum activation):
-    weight(inputSize, outputSize, 1),
+    weight(outputSize, inputSize, 1),
     bias(outputSize, 1,1),
     type(type)
 {
@@ -11,7 +11,7 @@ Layer::Layer(size_t inputSize, size_t outputSize, LayerTypeEnum type, Activation
 };
 
 Layer::Layer(size_t inputSize, size_t outputSize):
-    weight(inputSize, outputSize, 1),
+    weight(outputSize, inputSize, 1),
     bias(outputSize, 1,1),
     type(LayerTypeEnum::DENSE),
     activate(ReLU::activate)
