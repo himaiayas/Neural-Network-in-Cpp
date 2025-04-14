@@ -1,3 +1,4 @@
+#pragma once
 #include "../interfaces/layer.h"
 #include "activation.cpp"
 #include "layer.cpp"

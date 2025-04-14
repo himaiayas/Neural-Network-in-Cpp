@@ -1,16 +1,12 @@
 #pragma once
 #include "matrix.h"
 #include "activation.h"
+#include "../utils/enum.h"
 
 #ifndef LAYER_H
 #define LAYER_H
 
-enum LayerTypeEnum{
-    DENSE,
-};
-enum ActivationTypeEnum{
-    ReLU
-};
+
 
 
 
@@ -22,11 +18,15 @@ public:
     Matrix bias;
     enum LayerTypeEnum type;
     ActivationFunction activate;
+    Layer* next = nullptr;
+    Layer* prev = nullptr;
 
     Layer(size_t inputSize, size_t outputSize, LayerTypeEnum type, ActivationTypeEnum activation);
     Layer(size_t inputSize, size_t outputSize);
 
     void setActivation(ActivationTypeEnum activation);
+    size_t getSize();
+    void print();
 
     virtual Matrix forePropagation(const Matrix& input) = 0;
 
