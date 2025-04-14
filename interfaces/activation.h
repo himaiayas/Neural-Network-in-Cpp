@@ -4,9 +4,11 @@
 #ifndef ACTIVATION_H
 #define ACTIVATION_H
 
-class Activation{
+struct Activation{
 public:
-    Matrix static activate(const Matrix& logits);
-}
+    static void activate(Matrix& logits);
+};
 
 #endif
+
+

@@ -5,7 +5,7 @@
 
 Matrix::Matrix(size_t rows, size_t cols, std::vector<double>& data):
         rows(rows), 
-        cols(cols), 
+        cols(cols),
         data(data)
     {
         if (data.size()!=rows*cols){
@@ -24,14 +24,14 @@ double Matrix::operator()(size_t row, size_t col) const {
         if (rows<row || cols<col){
             throw std::length_error("() Operation: Out of range");
         }
-        return data[row*rows + col];
+        return data[row*cols + col];
     }
 
 double& Matrix::operator()(size_t row, size_t col) {
         if (rows<row || cols<col){
             throw std::length_error("() Operation: Out of range");
         }
-        return data[row*rows + col];
+        return data[row*cols + col];
     }
 
 Matrix Matrix::operator+(const Matrix& other) const {
@@ -88,7 +88,7 @@ void Matrix::print(){
             for (size_t j=0; j<cols; j++){
                 std::cout<<(*this)(i,j)<<" ";
             }
-            std::cout<<"\n";
+            std::cout<<std::endl;
         }
     }
 
