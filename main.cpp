@@ -6,10 +6,14 @@
 #include "implementations/dense-layer.cpp"
 #include "implementations/neural-network.cpp"
 
+#include <random>
+#include <cmath>
+
 int main(){
     NeuralNetwork network(10,4);
-    network.addLayer(6,LayerTypeEnum::DENSE,ActivationTypeEnum::ReLU);
-    network.addLayer(4,LayerTypeEnum::DENSE,ActivationTypeEnum::ReLU);
+    network.addHiddenLayer(6,LayerTypeEnum::DENSE,ActivationTypeEnum::ReLU,InitializationTypeEnum::He);
+    network.addHiddenLayer(6,LayerTypeEnum::DENSE,ActivationTypeEnum::ReLU,InitializationTypeEnum::He);
+    network.addOutputLayer();
     network.print();
     
 }

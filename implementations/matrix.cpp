@@ -85,12 +85,15 @@ size_t Matrix::numCols() const{
     }
 
 void Matrix::print(){
+        std::cout<<"["<<std::endl;
         for (size_t i=0; i<rows; i++){
+            std::cout<<"[";
             for (size_t j=0; j<cols; j++){
                 std::cout<<(*this)(i,j)<<" ";
             }
-            std::cout<<std::endl;
+            std::cout<<"]"<<std::endl;
         }
+        std::cout<<"]"<<std::endl;
     }
 
 Matrix Matrix::T(){

@@ -13,7 +13,7 @@ void NeuralNetwork::print(){
 
     Layer* cur = first;
     while(cur!=nullptr){
-        cur->print();
+        cur->printFull();
         cur = cur->next;
     }
 
@@ -21,6 +21,7 @@ void NeuralNetwork::print(){
         std::cout<<"Output size not match with lastest output layer"<<std::endl;
     }
 };
+
 
 void NeuralNetwork::addLayer(Layer* layer){
     if (first==nullptr){
@@ -34,7 +35,7 @@ void NeuralNetwork::addLayer(Layer* layer){
     }
 };
 
-void NeuralNetwork::addLayer(size_t size, LayerTypeEnum type, ActivationTypeEnum activation){
+void NeuralNetwork::addHiddenLayer(size_t size, LayerTypeEnum type, ActivationTypeEnum activation,InitializationTypeEnum initialization){
     size_t layerInputSize;
     if (first==nullptr) {
         layerInputSize = inputSize;
@@ -45,9 +46,22 @@ void NeuralNetwork::addLayer(size_t size, LayerTypeEnum type, ActivationTypeEnum
     Layer* layer;
     switch(type){
         case LayerTypeEnum::DENSE:
-            layer = new DenseLayer(layerInputSize, size, type, activation);
+            layer = new DenseLayer(layerInputSize, size, type, activation, initialization);
             break;
     };
 
     addLayer(layer);
+}
+
+
+void NeuralNetwork::addOutputLayer(){
+    addHiddenLayer(outputSize, LayerTypeEnum::DENSE, ActivationTypeEnum::SoftMax, InitializationTypeEnum::Xavier);
+}
+
+void NeuralNetwork::verifyOutputLayer(){
+    if (!hasOutputLayer) throw std::exception();
+}
+
+Matrix NeuralNetwork::forePropagation(const Matrix& input){
+    return this->first->forePropagation(input);
 }
