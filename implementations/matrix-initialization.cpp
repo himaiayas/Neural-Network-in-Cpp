@@ -4,16 +4,18 @@
 #include <random>
 #include <cmath>
 
+std::mt19937_64 InitGenerator::generator(std::time(nullptr));
+
+
 struct HeInitialization : MatrixInitialization{
 public:
     static void initializeWeight(Matrix& weight){
         double stddev = sqrt(2.0/weight.numCols());
-        std::default_random_engine generator;
         std::normal_distribution<double> dist(0,stddev);
 
         for (size_t i=0; i<weight.numRows(); i++){
             for (size_t j=0; j<weight.numCols(); j++){
-                weight(i,j) = dist(generator);
+                weight(i,j) = dist(InitGenerator::generator);
             }
         }
     }
@@ -23,12 +25,11 @@ struct XavierInitialization : MatrixInitialization{
 public:
     static void initializeWeight(Matrix& weight){
         double stddev = sqrt(2.0/(weight.numCols()+(weight.numRows())));
-        std::default_random_engine generator;
         std::normal_distribution<double> dist(0,stddev);
 
         for (size_t i=0; i<weight.numRows(); i++){
             for (size_t j=0; j<weight.numCols(); j++){
-                weight(i,j) = dist(generator);
+                weight(i,j) = dist(InitGenerator::generator);
             }
         }
     }

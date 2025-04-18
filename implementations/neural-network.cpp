@@ -2,6 +2,7 @@
 #include "layer.cpp"
 #include "dense-layer.cpp"
 #include "../interfaces/neural-network.h"
+#include "iostream"
 
 NeuralNetwork::NeuralNetwork(size_t inputSize, size_t outputSize):
     inputSize(inputSize),
@@ -36,6 +37,7 @@ void NeuralNetwork::addLayer(Layer* layer){
 };
 
 void NeuralNetwork::addHiddenLayer(size_t size, LayerTypeEnum type, ActivationTypeEnum activation,InitializationTypeEnum initialization){
+    std::cout<<"Adding layer"<<std::endl;
     size_t layerInputSize;
     if (first==nullptr) {
         layerInputSize = inputSize;
@@ -44,9 +46,13 @@ void NeuralNetwork::addHiddenLayer(size_t size, LayerTypeEnum type, ActivationTy
     }
 
     Layer* layer;
+
     switch(type){
         case LayerTypeEnum::DENSE:
             layer = new DenseLayer(layerInputSize, size, type, activation, initialization);
+            break;
+        case LayerTypeEnum::OUTPUT:
+            layer = new OutputLayer(layerInputSize, size, type, activation, initialization);
             break;
     };
 
@@ -55,7 +61,7 @@ void NeuralNetwork::addHiddenLayer(size_t size, LayerTypeEnum type, ActivationTy
 
 
 void NeuralNetwork::addOutputLayer(){
-    addHiddenLayer(outputSize, LayerTypeEnum::DENSE, ActivationTypeEnum::SoftMax, InitializationTypeEnum::Xavier);
+    addHiddenLayer(outputSize, LayerTypeEnum::OUTPUT, ActivationTypeEnum::SoftMax, InitializationTypeEnum::Xavier);
 }
 
 void NeuralNetwork::verifyOutputLayer(){

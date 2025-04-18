@@ -77,6 +77,62 @@ Matrix Matrix::operator*(const Matrix& other) const{
         return result;
     }
 
+Matrix Matrix::operator*(double scalar) const{
+        
+        Matrix result(rows,cols,0);
+        for (size_t i=0; i<rows; i++){
+            for (size_t j=0; j<cols; j++){
+                result(i,j) = (*this)(i,j)*scalar;
+            }
+        }
+        return result;
+    }
+
+
+Matrix& Matrix::operator+=(const Matrix& other){
+    if (rows!=other.numRows() || cols!=other.numCols() ){
+            throw std::length_error("+= Operation: Size not match");
+        }
+    for (size_t i=0; i<rows; i++){
+            for (size_t j=0; j<cols; j++){
+                (*this)(i,j) = (*this)(i,j) + other(i,j);
+            }
+        }
+    return *this;
+}
+
+Matrix& Matrix::operator-=(const Matrix& other){
+    if (rows!=other.numRows() || cols!=other.numCols() ){
+            throw std::length_error("-= Operation: Size not match");
+        }
+    for (size_t i=0; i<rows; i++){
+            for (size_t j=0; j<cols; j++){
+                (*this)(i,j) = (*this)(i,j) - other(i,j);
+            }
+        }
+    return *this;
+}
+
+Matrix Matrix::dot(const Matrix& other) const{
+    if (rows!=other.numRows() || cols!=other.numCols() ){
+            throw std::length_error("+ Operation: Size not match");
+        }
+        Matrix result(rows,cols,0);
+        for (size_t i=0; i<rows; i++){
+            for (size_t j=0; j<cols; j++){
+                result(i,j) = (*this)(i,j) * other(i,j);
+            }
+        }
+        return result;
+
+}
+
+
+
+
+
+
+
 size_t Matrix::numRows() const {
         return this->rows;
     }
@@ -89,9 +145,9 @@ void Matrix::print(){
         for (size_t i=0; i<rows; i++){
             std::cout<<"[";
             for (size_t j=0; j<cols; j++){
-                std::cout<<(*this)(i,j)<<" ";
+                std::cout<<(*this)(i,j)<<", ";
             }
-            std::cout<<"]"<<std::endl;
+            std::cout<<"],"<<std::endl;
         }
         std::cout<<"]"<<std::endl;
     }

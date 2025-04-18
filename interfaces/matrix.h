@@ -7,7 +7,7 @@
 
 class Matrix{
 private:
-    const size_t rows,cols;
+    size_t rows,cols;
     std::vector<double> data;
 public:
     Matrix(size_t rows, size_t cols, std::vector<double>& data);
@@ -22,6 +22,11 @@ public:
     Matrix operator+(const Matrix& other) const;
     Matrix operator-(const Matrix& other) const;
     Matrix operator*(const Matrix& other) const;
+    Matrix operator*(double scalar) const;
+    Matrix& operator+=(const Matrix& other);
+    Matrix& operator-=(const Matrix& other);
+    Matrix dot(const Matrix& other) const;
+
 
     Matrix T();
 };

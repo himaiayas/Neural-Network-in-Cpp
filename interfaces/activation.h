@@ -7,6 +7,7 @@
 struct Activation{
 public:
     static void activate(Matrix& logits);
+    static Matrix differentiate(Matrix& activation);
 };
 
 #endif
